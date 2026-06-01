@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: export-service
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: practice
+      discovery:
+        server-addr: localhost:8848
+        namespace: practice
+  datasource:
+    url: jdbc:mysql://localhost:3306/practice_order?useUnicode=true&characterEncoding=utf8mb4&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: mysqlroot
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8005
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+logging:
+  level:
+    com.practice: debug

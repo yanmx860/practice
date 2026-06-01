@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: practice
+      discovery:
+        server-addr: localhost:8848
+        namespace: practice
+  datasource:
+    url: jdbc:mysql://localhost:3306/practice_order?useUnicode=true&characterEncoding=utf8mb4&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: mysqlroot
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: auto
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 3000ms
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 8002
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:8080/xxl-job-admin
+    executor:
+      appname: order-service
+      port: 9998
+      logpath: /data/xxl-job/logs
+      logretentiondays: 30
+seata:
+  application-id: order-service
+  tx-service-group: practice_tx_group
+  service:
+    vgroup-mapping:
+      practice_tx_group: default
+    grouplist:
+      default: localhost:8091
+  registry:
+    type: nacos
+    nacos:
+      server-addr: localhost:8848
+      namespace: practice
+  config:
+    type: nacos
+    nacos:
+      server-addr: localhost:8848
+      namespace: practice
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+logging:
+  level:
+    com.practice: debug
