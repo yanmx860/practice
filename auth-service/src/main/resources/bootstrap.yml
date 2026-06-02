@@ -4,6 +4,8 @@ spring:
   cloud:
     nacos:
       config:
+        import-check:
+          enabled: false
         server-addr: localhost:8848
         file-extension: yaml
         namespace: practice
